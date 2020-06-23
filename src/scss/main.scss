@@ -493,6 +493,10 @@ table {
   background: $darker;
   border-radius: $table-radius;
 
+  code {
+    background: $background;
+  }
+
   thead {
     tr {
       border-spacing: 0;
@@ -738,7 +742,7 @@ a.button {
     .username,
     .discriminator {
       font-weight: bold;
-      font-size: 0.875em;
+      font-size: 1em;
       line-height: $user-small-avatar-size;
     }
 

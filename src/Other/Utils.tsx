@@ -46,12 +46,7 @@ export function formatWithElements(
   let match_index = 0;
   stringPieces.forEach((piece, index) => {
     if (piece !== "") {
-      to_return.push(
-        <span className="text">
-          {/**formatWithElements(other_placeholders, stringPieces[index])*/}
-          {stringPieces[index]}
-        </span>
-      );
+      to_return.push(<span className="text">{stringPieces[index]}</span>);
       return;
     }
     let match = match_array[match_index];
