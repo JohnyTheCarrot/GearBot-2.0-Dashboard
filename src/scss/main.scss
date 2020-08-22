@@ -29,26 +29,6 @@ $box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
     .main-scroller {
       background: themed("primary");
     }
-    table,
-    th,
-    td {
-      border: 1px solid themed("table-border-color");
-    }
-    table {
-      background: themed("secondary");
-      thead {
-        background: themed("tertiary");
-      }
-      tbody {
-        tr:hover {
-          background: themed("table-row-hover");
-        }
-      }
-    }
-    code,
-    pre {
-      background: themed("secondary");
-    }
     .user-dropdown {
       background: themed("popout-color");
       div:hover {
@@ -59,18 +39,6 @@ $box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
       background: themed("secondary");
       .header-logo {
         color: themed("accent");
-      }
-    }
-    .footer {
-      color: themed("text-color");
-      background: themed("secondary");
-      .footer-content {
-        .footer-title {
-          color: themed("accent");
-        }
-      }
-      .footer-link {
-        color: themed("text-color");
       }
     }
     .login-content {
@@ -214,10 +182,6 @@ $box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
       }
     }
 
-    .panel {
-      background: themed("secondary");
-    }
-
     blockquote {
       &::before {
         background: themed("accent");
@@ -238,11 +202,6 @@ $box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 
     .alert-color {
       color: themed("alert");
-    }
-
-    input {
-      background: themed("secondary");
-      color: themed("text-color");
     }
 
     ::placeholder {
@@ -269,12 +228,6 @@ $box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
   }
 }
 
-.panel {
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: $box-shadow;
-}
-
 * {
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
@@ -290,30 +243,6 @@ body,
 
 * {
   outline: none;
-}
-
-code {
-  border-radius: 3px;
-  padding: 0 5px;
-}
-
-pre {
-  padding: 10px;
-  border-radius: 10px;
-  overflow-x: auto;
-}
-
-blockquote {
-  position: relative;
-
-  &::before {
-    content: "";
-    height: 100%;
-    left: -10px;
-    position: absolute;
-    width: 3px;
-    border-radius: 5px;
-  }
 }
 
 .main-scroller {
@@ -533,13 +462,6 @@ blockquote {
   }
 }
 
-input {
-  border: none;
-  border-radius: 50px;
-  padding: 10px;
-  padding-left: 15px;
-}
-
 .page-docs {
   width: 100%;
   display: flex;
@@ -636,58 +558,6 @@ input {
   }
 }
 
-.footer {
-  height: $footer-height;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .footer-content {
-    display: inline-grid;
-    grid-template-columns: 1fr auto;
-    width: $footer-and-navbar-content-width;
-
-    .footer-title {
-      margin: 0;
-      margin-bottom: 8px;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-
-      .footer-link {
-        text-decoration: none;
-        margin: 8px 0;
-        width: fit-content;
-      }
-    }
-
-    .copyright-notice {
-      font-weight: normal;
-
-      .name {
-        font-weight: bold;
-      }
-    }
-  }
-}
-
-li {
-  margin: 5px 0;
-
-  p {
-    margin: 0;
-  }
-}
-
-table,
-th,
-td {
-  border-spacing: 0;
-}
-
 .page-meet-the-team {
   height: 100%;
   width: 100%;
@@ -715,30 +585,6 @@ td {
   width: 100%;
   overflow-x: auto;
   border-radius: $table-radius;
-}
-
-table {
-  overflow-x: auto;
-  width: 100%;
-  border-radius: $table-radius;
-
-  thead {
-    tr {
-      border-spacing: 0;
-
-      th {
-        padding: 10px;
-      }
-    }
-
-    border: none;
-  }
-
-  tbody {
-    td {
-      padding: 10px;
-    }
-  }
 }
 
 button,

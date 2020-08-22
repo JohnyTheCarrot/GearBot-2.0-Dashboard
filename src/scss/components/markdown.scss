@@ -1,0 +1,90 @@
+@import "../themes.scss";
+@import "../constants.scss";
+
+.themed {
+  @include themify($themes) {
+    code,
+    pre {
+      background: themed("secondary");
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid themed("table-border-color");
+    }
+    table {
+      background: themed("secondary");
+      thead {
+        background: themed("tertiary");
+      }
+      tbody {
+        tr:hover {
+          background: themed("table-row-hover");
+        }
+      }
+    }
+  }
+}
+
+li {
+  margin: 5px 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+table,
+th,
+td {
+  border-spacing: 0;
+}
+
+code {
+  border-radius: 3px;
+  padding: 0 5px;
+}
+
+pre {
+  padding: 10px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+blockquote {
+  position: relative;
+
+  &::before {
+    content: "";
+    height: 100%;
+    left: -10px;
+    position: absolute;
+    width: 3px;
+    border-radius: 5px;
+  }
+}
+
+table {
+  overflow-x: auto;
+  width: 100%;
+  border-radius: $table-radius;
+
+  thead {
+    tr {
+      border-spacing: 0;
+
+      th {
+        padding: 10px;
+      }
+    }
+
+    border: none;
+  }
+
+  tbody {
+    td {
+      padding: 10px;
+    }
+  }
+}

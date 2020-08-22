@@ -4,6 +4,10 @@ import { Command } from "../Other/Types";
 import { permissionLevels } from "../Other/Constants";
 import { getString, getCommandDescription } from "../Language/LanguageHandler";
 
+//scss
+import "../scss/components/input.scss";
+import "../scss/components/markdown.scss";
+
 function renderCommand(commandName: string, command: Command) {
   return (
     <tr style={{ width: "100%" }} key={"command-" + commandName}>

@@ -1,0 +1,57 @@
+@import "../themes.scss";
+@import "../constants.scss";
+
+.themed {
+  @include themify($themes) {
+    .footer {
+      color: themed("text-color");
+      background: themed("secondary");
+      .footer-content {
+        .footer-title {
+          color: themed("accent");
+        }
+      }
+      .footer-link {
+        color: themed("text-color");
+      }
+    }
+  }
+}
+
+.footer {
+  height: $footer-height;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .footer-content {
+    display: inline-grid;
+    grid-template-columns: 1fr auto;
+    width: $footer-and-navbar-content-width;
+
+    .footer-title {
+      margin: 0;
+      margin-bottom: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+
+      .footer-link {
+        text-decoration: none;
+        margin: 8px 0;
+        width: fit-content;
+      }
+    }
+
+    .copyright-notice {
+      font-weight: normal;
+
+      .name {
+        font-weight: bold;
+      }
+    }
+  }
+}

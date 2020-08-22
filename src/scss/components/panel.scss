@@ -1,0 +1,15 @@
+@import "../themes.scss";
+
+.themed {
+  @include themify($themes) {
+    .panel {
+      background: themed("secondary");
+    }
+  }
+}
+
+.panel {
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: $box-shadow;
+}
