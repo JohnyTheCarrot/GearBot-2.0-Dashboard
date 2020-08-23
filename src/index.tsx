@@ -1,10 +1,11 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+//import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Theme } from "./Other/Types";
 import { setCurrentTheme } from "./Other/Utils";
+const App = lazy(() => import("./App"));
 
 declare global {
   interface Window {
@@ -19,7 +20,9 @@ window.applyTheme = (theme: Theme) => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Suspense fallback={<></>}>
+      <App />
+    </Suspense>
   </React.StrictMode>,
   document.getElementById("root")
 );

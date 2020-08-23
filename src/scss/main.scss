@@ -26,7 +26,8 @@ $box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 
 .themed {
   @include themify($themes) {
-    .main-scroller {
+    .main-scroller,
+    #root {
       background: themed("primary");
     }
     table,
@@ -284,7 +285,7 @@ html,
 body,
 #root,
 .main {
-  height: 100%;
+  flex-grow: 1;
   overflow-y: hidden;
 }
 

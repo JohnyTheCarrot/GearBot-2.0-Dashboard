@@ -44,16 +44,16 @@ const dummyGuild2: DiscordGuild = {
 
 const dummyLogEntries: LogEntry[] = [
   {
-    logType: "KICK",
-    author: dummyUsers[1],
-    target: dummyUsers[0],
-    reason: "Being a big dummy.",
-  },
-  {
     logType: "BAN",
     author: dummyUsers[1],
     target: dummyUsers[0],
     reason: "Writing bad code.",
+  },
+  {
+    logType: "KICK",
+    author: dummyUsers[1],
+    target: dummyUsers[0],
+    reason: "Being a big dummy.",
   },
 ];
 

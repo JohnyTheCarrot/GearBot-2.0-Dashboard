@@ -92,6 +92,7 @@ export class FooterDesktop extends React.Component<
                     href={supportServerInvite}
                     target="_blank noreferrer"
                     style={{ display: "flex" }}
+                    aria-label="Join the Discord"
                   >
                     <DiscordLogo
                       className="svg_basic"
@@ -192,7 +193,7 @@ type FooterProps = {
 
 type FooterState = {};
 
-export class Footer extends React.Component<FooterProps, FooterState> {
+export default class Footer extends React.Component<FooterProps, FooterState> {
   constructor(props: FooterProps) {
     super(props);
     this.state = {};

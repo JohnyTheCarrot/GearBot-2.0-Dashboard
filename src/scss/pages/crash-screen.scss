@@ -1,0 +1,105 @@
+@import "../themify.scss";
+@import "../themes.scss";
+
+// Special Thanks: Tee Diang (@cybercountess) => https://codepen.io/cybercountess/pen/WNbBxXq
+
+.themed {
+  @include themify($themes) {
+    .crash-screen {
+      background: themed("secondary");
+      color: themed("text-color");
+    }
+  }
+}
+
+.crash-screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+}
+
+$error-color: #ff4f4f;
+
+.error {
+  position: relative;
+  color: $error-color;
+  font-size: 4rem;
+  margin: 0;
+  user-select: none;
+}
+
+.error::before {
+  color: $error-color;
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  overflow: hidden;
+  top: 0;
+  animation: noise-1 3s linear infinite alternate-reverse, glitch 5s 5s infinite;
+}
+
+.error::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  overflow: hidden;
+  top: 0;
+  animation: noise-2 3s linear infinite alternate-reverse, glitch 5s 5s infinite;
+}
+
+.error-subtext {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.error-tip {
+  position: absolute;
+  bottom: 20px;
+}
+
+.glow {
+  @extend .error;
+  text-shadow: 0 0 1000px red;
+  color: transparent;
+  position: absolute;
+  top: 0;
+}
+
+@keyframes noise-1 {
+  $steps: 30;
+  @for $i from 1 through $steps {
+    #{percentage($i*(1/$steps))} {
+      $top: random(100);
+      $bottom: random(101 - $top);
+      clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+    }
+  }
+}
+
+@keyframes noise-2 {
+  $steps: 30;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      $top: random(100);
+      $bottom: random(101 - $top);
+      clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+    }
+  }
+}
+
+@keyframes glitch {
+  1% {
+    transform: rotateX(10deg) skewX(90deg);
+  }
+  2% {
+    transform: rotateX(0deg) skewX(0deg);
+  }
+}

@@ -86,7 +86,7 @@ type DocumentationState = {
   markdown?: string;
 };
 
-export class Documentation extends React.Component<
+export default class Documentation extends React.Component<
   DocumentationProps,
   DocumentationState
 > {

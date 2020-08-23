@@ -1,0 +1,30 @@
+@import "../themify.scss";
+@import "../themes.scss";
+
+.themed {
+  @include themify($themes) {
+    .banner {
+      color: #302c2c;
+      background: themed("accent");
+      animation: flash 1s 3;
+    }
+    @keyframes flash {
+      0% {
+        background: themed("accent");
+      }
+      50% {
+        background: red;
+      }
+      100% {
+        background: themed("accent");
+      }
+    }
+  }
+}
+
+.banner {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 5px;
+}
