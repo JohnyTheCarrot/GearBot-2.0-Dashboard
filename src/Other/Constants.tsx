@@ -87,6 +87,11 @@ export const routes: GearRawRoute[] = [
     exact: true,
     component_file_name: "PrivacyPolicy",
   },
+  {
+    path: "/crashscreentest",
+    exact: true,
+    component_file_name: "CrashScreenErrorBoundary",
+  },
 ];
 
 export const footerLinks: FooterLink[] = [
