@@ -1,0 +1,47 @@
+.guilds-list {
+  width: 72px;
+}
+
+.guild-list-entry {
+  width: 48px;
+  height: 48px;
+  margin: 12px;
+  display: flex;
+  transition: border-radius 300ms;
+  border-radius: 100%;
+  img {
+    border-radius: 100%;
+    overflow: hidden;
+  }
+  * {
+    user-select: none;
+  }
+  &.selected {
+    border-radius: 20%;
+    img {
+      border-radius: 20%;
+    }
+  }
+  &:not(.selected):hover, &:not(.selected):hover img {
+    border-radius: 25%;
+  }
+}
+
+.selected-line {
+  width: 8px;
+  height: 48px;
+  position: absolute;
+  left: -4px;
+  border-radius: 8px;
+}
+
+.gearbot-logo {
+  margin: auto;
+  fill-opacity: 1;
+}
+
+.separator {
+  width: 32px;
+  height: 2px;
+  margin: 12px auto;
+}

@@ -14,6 +14,8 @@ import CrashScreenErrorBoundary from "./Pages/CrashScreenErrorBoundary";
 const NavBar = lazy(() => import("./Components/NavBar"));
 const Footer = lazy(() => import("./Components/Footer"));
 
+const ChannelPreview = lazy(() => import("./Pages/Channel Preview/ChannelPreview"));
+
 let routes = raw_routes.map((route) => {
   return {
     exact: route.exact,
@@ -113,6 +115,18 @@ export class App extends React.Component<AppProps, AppState> {
   }
 
   render() {
+    if (window.location.pathname === "/channel-preview")
+      return (
+        <div className={"main theme-" + this.state.theme}>
+          <div className="themed full-height">
+            <CrashScreenErrorBoundary>
+              <Suspense fallback={<></>}>
+                <ChannelPreview />
+              </Suspense>
+            </CrashScreenErrorBoundary>
+          </div>
+        </div>
+      )
     return (
       <Router>
         <div className={"main theme-" + this.state.theme}>

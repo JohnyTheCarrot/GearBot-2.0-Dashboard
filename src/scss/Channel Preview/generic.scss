@@ -1,0 +1,54 @@
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.fill-width {
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.pointer-cursor {
+  cursor: pointer;
+}
+
+.scrollview-y {
+  overflow-y: auto;
+}
+
+@keyframes tooltip-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+*[data-tooltip] {
+  position: relative;
+  &:hover::before {
+    content: attr(data-tooltip);
+    animation: tooltip-show 0.1s;
+    position: absolute;
+    top: calc(50% - 17px); // 50% - half of height
+    font-weight: 600;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    padding: 8px 16px;
+    margin: 0;
+    z-index: 10;
+    width: max-content;
+    -webkit-box-shadow: 4px 4px 40px -16px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 4px 40px -16px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 40px -16px rgba(0,0,0,0.75);
+  }
+}
+
+[data-tooltip-location="right"]::before {
+  left: calc(100% + 10px);
+}

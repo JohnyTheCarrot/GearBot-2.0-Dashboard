@@ -1,6 +1,6 @@
 /** @format */
 
-import { DiscordUser, DiscordGuild, Theme } from "./Types";
+import { DiscordUser, DiscordGuild, Theme, GuildEntry } from "./Types";
 import React, { ReactElement } from "react";
 import { defaultTheme } from "./Constants";
 
@@ -14,13 +14,12 @@ export function capStringLength(str: string, length: number) {
 }
 
 export function getGuildIcon(
-  guild: DiscordGuild,
+  guild: DiscordGuild | GuildEntry,
   size?: 16 | 32 | 64 | 128 | 512
 ) {
   if (!guild.icon) return undefined;
-  return `https://cdn.discordapp.com/icons/${guild.id}/${
-    guild.icon
-  }.webp?size=${size ?? 128}`;
+  return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon
+    }.webp?size=${size ?? 128}`;
 }
 
 export function formatWithElements(

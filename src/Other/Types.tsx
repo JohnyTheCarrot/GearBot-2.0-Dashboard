@@ -76,3 +76,49 @@ export type LogEntry = {
   duration?: number;
   reason: string;
 };
+
+// Channel Preview
+
+// either 0 (role) or 1 (member)
+export enum PermissionOverwriteType {
+  ROLE = 0,
+  MEMBER = 1
+};
+
+export enum ChannelType {
+  GUILD_TEXT = 0,
+  DM = 1,
+  GUILD_VOICE = 2,
+  GROUP_DM = 3,
+  GUILD_CATEGORY = 4,
+  GUILD_NEWS = 5,
+  GUILD_STORE = 6
+};
+
+export type PermissionOverwrite = {
+  id: string;
+  type: PermissionOverwriteType;
+  allow: number;
+  deny: number;
+};
+
+export type Channel = {
+  id: string;
+  name: string;
+  type: ChannelType;
+  parent_id?: string;
+  user_limit?: number;
+  rate_limit_per_user?: number;
+  nsfw?: boolean;
+  position?: number;
+  permission_overwrites?: PermissionOverwrite[];
+};
+
+export type GuildEntry = {
+  name: string;
+  id: string;
+  icon?: string | null;
+  banner?: string | null;
+  channels: Channel[];
+};
+
