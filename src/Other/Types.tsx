@@ -95,18 +95,37 @@ export enum ChannelType {
   GUILD_STORE = 6
 };
 
+export type DiscordRoleRaw = {
+  id: string;
+  name: string;
+  permissions: string;
+  position: number;
+  color: number;
+  hoist: boolean;
+  managed: boolean;
+  mentionable: boolean;
+};
+
+export type DiscordRole = {
+  id: string;
+  name: string;
+  permissions: bigint
+  color: number;
+  position: number;
+};
+
 export type PermissionOverwrite = {
   id: string;
   type: PermissionOverwriteType;
-  allow: number;
-  deny: number;
+  allow: string;
+  deny: string;
 };
 
 export type Channel = {
   id: string;
   name: string;
   type: ChannelType;
-  parent_id?: string;
+  parent_id?: string | null;
   user_limit?: number;
   rate_limit_per_user?: number;
   nsfw?: boolean;
@@ -119,6 +138,10 @@ export type GuildEntry = {
   id: string;
   icon?: string | null;
   banner?: string | null;
-  channels: Channel[];
+  currentRoles?: DiscordRole[];
 };
 
+export type ModalGetAndSet = {
+  modal?: JSX.Element;
+  setModal: (modal: JSX.Element) => void;
+} | undefined;

@@ -1,11 +1,12 @@
 /** @format */
 
-import React, { lazy, Suspense } from "react";
+import React, {lazy, Suspense} from "react";
 import LoadingScreen from "./Components/LoadingScreen";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./scss/main.scss";
-import { routes as raw_routes, ChangeThemeContext } from "./Other/Constants";
-import { Theme, GearResolvedRoute, GearPromisedRoute } from "./Other/Types";
+import "./scss/Modals/modal-background.scss";
+import { routes as raw_routes, ChangeThemeContext, ModalContext } from "./Other/Constants";
+import { Theme, GearPromisedRoute } from "./Other/Types";
 import { VERSION } from "./version";
 import { getCurrentTheme, setCurrentTheme } from "./Other/Utils";
 import { ThemeContext } from "./Other/Constants";
@@ -30,10 +31,10 @@ type AppState = {
   width: number;
   height: number;
   theme: Theme;
+  modal?: JSX.Element;
 };
 
 export class App extends React.Component<AppProps, AppState> {
-  scrollerRef: React.RefObject<HTMLDivElement>;
   constructor(props: AppProps) {
     super(props);
     this.state = {
@@ -41,7 +42,6 @@ export class App extends React.Component<AppProps, AppState> {
       height: 0,
       theme: getCurrentTheme(),
     };
-    this.scrollerRef = React.createRef();
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
@@ -102,89 +102,47 @@ export class App extends React.Component<AppProps, AppState> {
       height: window.innerHeight,
     });
   }
-
-  async handleRouteComponent(
-    route: GearResolvedRoute,
-    props: { [key: string]: any }
-  ) {
-    return (
-      <Suspense fallback={LoadingScreen}>
-        <route.Component {...props} pageWidth={this.state.width} />
-      </Suspense>
-    );
-  }
-
   render() {
-    if (window.location.pathname === "/channel-preview")
-      return (
-        <div className={"main theme-" + this.state.theme}>
-          <div className="themed full-height">
-            <CrashScreenErrorBoundary>
-              <Suspense fallback={<></>}>
-                <ChannelPreview />
-              </Suspense>
-            </CrashScreenErrorBoundary>
-          </div>
-        </div>
-      )
     return (
       <Router>
         <div className={"main theme-" + this.state.theme}>
-          <div className="themed">
+          <div className="themed full-height">
             <CrashScreenErrorBoundary>
               <Suspense fallback={<></>}>
                 <ThemeContext.Provider value={this.state.theme}>
                   <ChangeThemeContext.Provider
                     value={(theme: Theme) => this.setState({ theme: theme })}
                   >
-                    <NavBar
-                      pageWidth={this.state.width}
-                      scroller={this.scrollerRef.current!!}
-                      user={
-                      /**{
-                      username: "JohnyTheCarrot",
-                      discriminator: "0001",
-                      id: "132819036282159104",
-                      avatar: "cd1027e339b0e0a1001fd84cf7e3be13",
-                    }*/ undefined
+                    <ModalContext.Provider
+                      value={
+                        {
+                          modal: this.state.modal,
+                          setModal: (modal: JSX.Element) => this.setState({modal: modal})
+                        }
                       }
-                    />
-                    <div className="main-scroller" ref={this.scrollerRef}>
-                      <div className="page">
-                        <Suspense fallback={<LoadingScreen />}>
-                          {routes.map(
-                            (route: GearPromisedRoute, index: number) => {
-                              return (
-                                <Route
-                                  exact={route.exact}
-                                  path={route.path}
-                                  key={"route-" + index}
-                                  render={(props: { [key: string]: any }) => {
-                                    let Component = lazy(route.component);
-                                    return (
-                                      <Component
-                                        {...props}
-                                        pageWidth={this.state.width}
-                                      />
-                                    );
-                                  }}
-                                />
-                              );
-                            }
-                          )}
-                        </Suspense>
-                      </div>
-                      <Footer
-                        pageWidth={this.state.width}
-                        scroller={this.scrollerRef.current!!}
-                        setTheme={(theme: Theme) => {
-                          this.setState({
-                            theme: theme,
-                          });
-                          setCurrentTheme(theme);
-                        }}
-                      />
-                    </div>
+                    >
+                      {this.state.modal && (
+                        <div className="modal-bg">
+                          {this.state.modal}
+                        </div>
+                      )}
+                      {window.location.pathname === "/guilds"
+                        ? <ChannelPreview/>
+                        : (
+                          <AppMain
+                            height={this.state.height}
+                            width={this.state.width}
+                            theme={this.state.theme}
+                            setTheme={(theme: Theme) => {
+                              this.setState({
+                                theme: theme
+                              });
+                              setCurrentTheme(theme);
+                            }}
+                          />
+                        )
+                      }
+                    </ModalContext.Provider>
                   </ChangeThemeContext.Provider>
                 </ThemeContext.Provider>
               </Suspense>
@@ -192,7 +150,73 @@ export class App extends React.Component<AppProps, AppState> {
           </div>
         </div>
       </Router>
-    );
+    )
+  }
+}
+
+type AppMainProps = {
+  width: number;
+  height: number;
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+};
+
+class AppMain extends React.Component<AppMainProps, { }> {
+  scrollerRef: React.RefObject<HTMLDivElement>;
+
+  constructor(props: AppMainProps) {
+    super(props);
+    this.scrollerRef = React.createRef();
+  }
+
+  render () {
+    return (
+      <>
+        <NavBar
+          pageWidth={this.props.width}
+          scroller={this.scrollerRef.current!!}
+          user={
+            /**{
+              username: "JohnyTheCarrot",
+              discriminator: "0001",
+              id: "132819036282159104",
+              avatar: "cd1027e339b0e0a1001fd84cf7e3be13",
+            }*/ undefined
+          }
+        />
+        <div className="main-scroller" ref={this.scrollerRef}>
+          <div className="page">
+            <Suspense fallback={<LoadingScreen />}>
+              {routes.map(
+                (route: GearPromisedRoute, index: number) => {
+                  return (
+                    <Route
+                      exact={route.exact}
+                      path={route.path}
+                      key={"route-" + index}
+                      render={(props: { [key: string]: any }) => {
+                        let Component = lazy(route.component);
+                        return (
+                          <Component
+                            {...props}
+                            pageWidth={this.props.width}
+                          />
+                        );
+                      }}
+                    />
+                  );
+                }
+              )}
+            </Suspense>
+          </div>
+          <Footer
+            pageWidth={this.props.width}
+            scroller={this.scrollerRef.current!!}
+            setTheme={this.props.setTheme}
+          />
+        </div>
+      </>
+    )
   }
 }
 

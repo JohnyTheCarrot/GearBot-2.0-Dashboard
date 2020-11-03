@@ -1,6 +1,6 @@
 /** @format */
 
-import { DiscordUser, DiscordGuild, Theme, GuildEntry } from "./Types";
+import {DiscordUser, DiscordGuild, Theme, GuildEntry, DiscordRoleRaw, DiscordRole} from "./Types";
 import React, { ReactElement } from "react";
 import { defaultTheme } from "./Constants";
 
@@ -13,12 +13,32 @@ export function capStringLength(str: string, length: number) {
   else return str;
 }
 
+export function processRawRole(rawRole: DiscordRoleRaw) {
+  let discordRole: DiscordRole = {
+    id: rawRole.id,
+    name: rawRole.name,
+    permissions: BigInt(rawRole.permissions),
+    color: rawRole.color,
+    position: rawRole.position
+  };
+  return discordRole;
+}
+
 export function getGuildIcon(
   guild: DiscordGuild | GuildEntry,
   size?: 16 | 32 | 64 | 128 | 512
 ) {
   if (!guild.icon) return undefined;
   return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon
+    }.webp?size=${size ?? 128}`;
+}
+
+export function getGuildBanner(
+  guild: GuildEntry,
+  size?: 16 | 32 | 64 | 128 | 512 | 1024 | 2048
+) {
+  if (!guild.icon) return undefined;
+  return `https://cdn.discordapp.com/banners/${guild.id}/${guild.banner
     }.webp?size=${size ?? 128}`;
 }
 

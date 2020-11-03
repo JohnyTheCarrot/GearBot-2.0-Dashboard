@@ -1,0 +1,28 @@
+.role {
+  border-radius: 90px;
+  font-size: 12px;
+  display: inline-flex;
+  height: 22px;
+  box-sizing: border-box;
+  width: fit-content;
+  user-select: none;
+  .ball {
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: auto 0 auto 4px;
+    display: inline-flex;
+  }
+  .svg_close {
+    visibility: hidden;
+  }
+  p {
+    margin: auto 4px auto 3px;
+  }
+}
+
+.role:hover{
+  .svg_close {
+    visibility: visible;
+  }
+}

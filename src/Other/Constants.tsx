@@ -1,6 +1,6 @@
 /** @format */
 
-import { GearRawRoute, FooterLink, NavBarTab, Theme } from "./Types";
+import {GearRawRoute, FooterLink, NavBarTab, Theme, ModalGetAndSet} from "./Types";
 import { getString } from "../Language/LanguageHandler";
 import React from "react";
 
@@ -12,6 +12,10 @@ export const botInvite =
 export const supportServerInvite = "https://discord.gg/EKautd5";
 
 export const defaultTheme: Theme = "dark";
+
+export let modal: ModalGetAndSet = {
+  setModal: (_: JSX.Element) => {}
+};
 
 export const permissionLevels: string[] = [
   "Public",
@@ -87,6 +91,11 @@ export const routes: GearRawRoute[] = [
     exact: true,
     component_file_name: "PrivacyPolicy",
   },
+  {
+    path: "/crash-screen",
+    exact: true,
+    component_file_name: "CrashScreenErrorBoundary"
+  }
 ];
 
 export const footerLinks: FooterLink[] = [
@@ -131,4 +140,6 @@ export const footerLinks: FooterLink[] = [
 
 export const ThemeContext = React.createContext(defaultTheme as Theme);
 
-export const ChangeThemeContext = React.createContext((theme: Theme) => {});
+export const ChangeThemeContext = React.createContext((_: Theme) => { });
+
+export let ModalContext = React.createContext(modal as ModalGetAndSet);

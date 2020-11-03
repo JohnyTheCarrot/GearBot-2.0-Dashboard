@@ -1,3 +1,10 @@
 .channel-preview {
   display: inline-flex;
 }
+
+.base {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex: 1 1 auto;
+}

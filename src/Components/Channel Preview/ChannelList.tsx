@@ -5,6 +5,8 @@ import "../../scss/Channel Preview/channel-list.scss";
 import { Channel, ChannelType, GuildEntry } from "../../Other/Types";
 import ChannelEntry from "./Channel";
 import ChannelCategory from "./ChannelCategory";
+import { channels } from "../../Pages/Channel Preview/DummyData";
+import { getGuildBanner } from "../../Other/Utils";
 
 type GuildsListProps = {
   guild: GuildEntry;
@@ -45,7 +47,7 @@ export default class ChannelList extends React.Component<GuildsListProps, Guilds
 
   render() {
     let hasBanner = this.props.guild.banner !== undefined && this.props.guild.banner !== null;
-    const sorted_channels = this.props.guild.channels.sort(
+    const sorted_channels = channels[this.props.guild.id].sort(
       (a: Channel, b: Channel) => {
         if (a.position && b.position)
           return a.position - b.position;
@@ -55,33 +57,36 @@ export default class ChannelList extends React.Component<GuildsListProps, Guilds
     return (
       <>
         <div className="channel-list full-height secondary">
-          <div className="channels fill-width">
-            {
-              hasBanner && this.state.scrollTop < 90
-                ?
-                <NameWithBanner guild={this.props.guild} scrollTop={this.state.scrollTop} />
-                :
-                <NameWithoutBanner guild={this.props.guild} />
-            }
-            <div className="scrollview-y full-height" ref={this.channelList} onScroll={this.contentOnScroll}>
-              <div className={"content secondary " + (hasBanner ? "banner-padding" : "")} style={{
-                color: "#a7a7a7"
-              }}>
-                {sorted_channels.map((channel: Channel, index: number) => {
-                  if (channel.type === ChannelType.GUILD_CATEGORY)
-                    return <ChannelCategory
-                      channel={channel}
-                      open={this.state.category_states[channel.position!!]}
-                      toggleState={this.toggleState}
-                    >
-                      {sorted_channels
-                        .filter(child_channel => child_channel.parent_id === channel.id)
-                        .map((channel: Channel, index: number) => <ChannelEntry key={"channel-" + index} channel={channel} />)
-                      }
-                    </ChannelCategory>
-                  else if (channel.parent_id === undefined)
-                    return <ChannelEntry key={"channel-" + index} channel={channel} />;
-                })}
+          <div>
+            <div className="channels fill-width">
+              {
+                hasBanner && this.state.scrollTop < 90
+                  ?
+                  <NameWithBanner guild={this.props.guild} scrollTop={this.state.scrollTop} />
+                  :
+                  <NameWithoutBanner guild={this.props.guild} />
+              }
+              <div className="scrollview-y full-height" ref={this.channelList} onScroll={this.contentOnScroll}>
+                <div className={"content secondary " + (hasBanner ? "banner-padding" : "")} style={{
+                  color: "#a7a7a7"
+                }}>
+                  {sorted_channels.map((channel: Channel, index: number) => {
+                    if (channel.type === ChannelType.GUILD_CATEGORY)
+                      return <ChannelCategory
+                        channel={channel}
+                        open={this.state.category_states[channel.position!!]}
+                        toggleState={this.toggleState}
+                        key={"category-" + index}
+                      >
+                        {sorted_channels
+                          .filter(child_channel => child_channel.parent_id === channel.id)
+                          .map((channel: Channel, index: number) => <ChannelEntry key={"channel-" + index} channel={channel} />)
+                        }
+                      </ChannelCategory>
+                    else if (channel.parent_id === undefined)
+                      return <ChannelEntry key={"channel-" + index} channel={channel} />;
+                  })}
+                </div>
               </div>
             </div>
           </div>
@@ -97,13 +102,6 @@ type NameWithBannerProps = {
 }
 
 class NameWithBanner extends React.Component<NameWithBannerProps, {}> {
-  getGuildBanner(
-    size?: 16 | 32 | 64 | 128 | 512
-  ) {
-    if (!this.props.guild.icon) return undefined;
-    return `https://cdn.discordapp.com/banners/${this.props.guild.id}/${this.props.guild.banner
-      }.webp?size=${size ?? 128}`;
-  }
   render() {
     return (
       <div className="banner full-width">
@@ -111,7 +109,7 @@ class NameWithBanner extends React.Component<NameWithBannerProps, {}> {
         <div className="banner-img-parent">
           <img
             className="banner-img"
-            src={this.getGuildBanner(512)}
+            src={getGuildBanner(this.props.guild, 512)}
             draggable={false}
             style={{
               transform: "scale(" + (1 + (this.props.scrollTop / 90)) + ")",
