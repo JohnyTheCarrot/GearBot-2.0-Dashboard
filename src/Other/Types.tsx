@@ -115,7 +115,7 @@ export type DiscordRole = {
 };
 
 export type PermissionOverwrite = {
-  id: string;
+  id: string; // role or user ID
   type: PermissionOverwriteType;
   allow: string;
   deny: string;
@@ -132,6 +132,13 @@ export type Channel = {
   position?: number;
   permission_overwrites?: PermissionOverwrite[];
 };
+
+export type DiscordMember = {
+  id: string;
+  username: string;
+  discriminator: string;
+  roles: DiscordRole[]
+}
 
 export type GuildEntry = {
   name: string;
