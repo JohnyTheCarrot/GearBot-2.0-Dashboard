@@ -1,0 +1,39 @@
+@import "../themify.scss";
+@import "../themes.scss";
+
+.themed {
+  @include themify($themes) {
+    .large-user-profile {
+      background: themed("secondary");
+
+      > img {
+        background: themed("primary");
+      }
+
+      .discriminator {
+        color: themed("secondary-text");
+      }
+    }
+  }
+}
+
+.large-user-profile {
+  padding: 16px;
+  border-radius: 9px;
+  display: flex;
+
+  .info {
+    font-size: 18px;
+    height: fit-content;
+    margin: auto 16px;
+    img:not(:first-child) {
+      margin-left: 10px;
+    }
+  }
+
+  > img {
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+  }
+}

@@ -43,7 +43,7 @@ export default class UserCard extends React.Component<
             />
           </div>
           <p className="username">
-            {capStringLength(this.props.user.username, 16)}
+            {capStringLength(this.props.user.name, 16)}
           </p>
           <span className="discriminator">
             #{this.props.user.discriminator}

@@ -74,10 +74,8 @@
 
     .svg_permission-checkmark {
       fill: none;
-      &:not(&.optional) {
-        circle {
-          fill: #39DF7B;
-        }
+      circle {
+        fill: #39DF7B;
       }
       &.optional {
         circle {

@@ -42,6 +42,13 @@
 	"selector_add_gearbot": "Add GearBot",
 	"required_perms_missing": "Permissions with this icon are required, but not enabled.",
 	"overview": "Overview",
+    "settings": "Settings",
+    "server_owner": "Server Owner",
+    "features": "Features",
+    "server_information": "Server Information",
+    "overview_feedback": "Find information on your server. Do you think there should be something else here? Give us {feedback_link}.",
+    "latest_infractions": "Latest Infractions",
+    "next_infractions_to_expire": "Next infractions to expire",
 
   "ping_help": "See if the bot is still online.",
   "quote_help": "Quotes the requested message.",

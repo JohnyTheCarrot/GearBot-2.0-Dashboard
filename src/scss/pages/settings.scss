@@ -1,0 +1,7 @@
+@import "../variables";
+
+.guild-settings__content {
+  > * {
+    margin-top: $spacing-04;
+  }
+}

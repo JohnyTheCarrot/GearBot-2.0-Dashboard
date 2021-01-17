@@ -7,9 +7,11 @@ import ResizeObserver from "resize-observer-polyfill";
 //SVGs
 import {ReactComponent as IconNext} from "../SVG/next.svg";
 import {ReactComponent as IconPrevious} from "../SVG/previous.svg";
+import LoadingScreen from "./LoadingScreen";
 
 type SelectorProps = {
 	title: string;
+	loading?: boolean;
 	style?: CSSProperties;
 };
 
@@ -157,24 +159,29 @@ export default class Selector extends React.Component<
 						</div>
 					</GridRow>
 				</GridRow>
-				<div
-					className={
-						"items" +
-						(this.state.index > 0 ? " non-zero-index" : "")
-					}
-				>
-					{this.state.index !== 0 && (
-						<div className="faded-item f1">
-							<div />
+				{this.props.loading
+					? <LoadingScreen instant/>
+					: (
+						<div
+							className={
+								"items" +
+								(this.state.index > 0 ? " non-zero-index" : "")
+							}
+						>
+							{this.state.index !== 0 && (
+								<div className="faded-item f1">
+									<div />
+								</div>
+							)}
+							{this.showSlice()}
+							{hasNext && (
+								<div className="faded-item f2">
+									<div />
+								</div>
+							)}
 						</div>
-					)}
-					{this.showSlice()}
-					{hasNext && (
-						<div className="faded-item f2">
-							<div />
-						</div>
-					)}
-				</div>
+					)
+				}
 			</Grid>
 		);
 	}

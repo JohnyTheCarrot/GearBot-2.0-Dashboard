@@ -46,7 +46,7 @@ export class UserProfile extends React.Component<
             alt=""
             src={getProfilePicture(this.props.user, false, 32)}
           />
-          <span className="username">{this.props.user.username}</span>
+          <span className="username">{this.props.user.name}</span>
           <span className="discriminator">
             #{this.props.user.discriminator}
           </span>

@@ -21,9 +21,9 @@ const pages = [
 		path: "overview",
 	},
 	{
-		name: "Perms Page",
-		path: "permissions",
-	},
+		name: getString("settings"),
+		path: "settings"
+	}
 ];
 
 export default class GuildNavigatorRibbon extends React.Component<

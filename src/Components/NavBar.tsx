@@ -187,9 +187,9 @@ export class MobileNavBar extends React.Component<
         )}
         <div className="hamburger">
           <div onClick={() => this.setState({ burgerOpened: true })}>
-            <span></span>
-            <span></span>
-            <span></span>
+            <span/>
+            <span/>
+            <span/>
           </div>
         </div>
         <div className="content">

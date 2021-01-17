@@ -19,16 +19,18 @@ import { allPermissions } from "../Other/PermissionUtils";
 
 const dummyUsers: DiscordUser[] = [
   {
-    username: "JohnyTheCarrot",
+    name: "JohnyTheCarrot",
     discriminator: "0001",
     id: "132819036282159104",
     avatar: "ace65d13c76f54972f95030e52bd5b56",
+    public_flags: 772
   },
   {
-    username: "AEnterprise",
+    name: "AEnterprise",
     discriminator: "4693",
     id: "106354106196570112",
     avatar: "a_830b0d2082e9b84d00816eae9324d29e",
+    public_flags: 0
   },
 ];
 
@@ -37,12 +39,14 @@ const dummyGuild: DiscordGuild = {
   owner: dummyUsers[1],
   id: "365498559174410241",
   icon: "a_8b7ebc6c35b4830c9645a7dc5a18c498",
+  features: []
 };
 
 const dummyGuild2: DiscordGuild = {
   name: "Johny's Development Server",
   owner: dummyUsers[0],
   id: "123",
+  features: []
 };
 
 const dummyLogEntries: LogEntry[] = [

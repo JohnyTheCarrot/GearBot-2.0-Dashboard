@@ -134,6 +134,9 @@ $box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
     .user {
       &.small {
         color: themed("text-color");
+        .avatar img {
+          background: themed("primary");
+        }
       }
     }
     .username,
@@ -495,45 +498,45 @@ blockquote {
   place-content: center;
   padding: 40px 0;
   margin: auto;
+}
 
-  .show-off {
-    $bg-offset: 30px;
-    position: relative;
-    height: 290px;
-    margin-top: $bg-offset;
+.show-off {
+  $bg-offset: 30px;
+  position: relative;
+  height: 290px;
+  margin-top: $bg-offset;
 
-    .bg,
-    .content {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      display: flex;
-
-      * {
-        margin: auto;
-      }
-    }
-
-    .bg {
-      overflow: hidden;
-      top: -$bg-offset;
-      bottom: $bg-offset;
-    }
+  .bg,
+  .content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
 
     * {
-      margin: 0;
-      text-align: center;
+      margin: auto;
     }
+  }
 
-    h1 {
-      font-size: 2.25em;
-    }
+  .bg {
+    overflow: hidden;
+    top: -$bg-offset;
+    bottom: $bg-offset;
+  }
 
-    p {
-      font-size: 0.875em;
-    }
+  * {
+    margin: 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2.25em;
+  }
+
+  p {
+    font-size: 0.875em;
   }
 }
 
@@ -951,16 +954,15 @@ a.button {
       }
     }
 
-    .username,
-    .discriminator {
-      font-weight: bold;
-      font-size: 0.875em;
-      line-height: $user-small-avatar-size;
-    }
-
     .username {
       margin-left: 4px;
     }
+  }
+  .username,
+  .discriminator {
+    font-weight: bold;
+    font-size: 0.875em;
+    line-height: $user-small-avatar-size;
   }
 }
 
@@ -1063,8 +1065,9 @@ a.button {
     margin-bottom: 20px;
     
     img {
-      width: 80%;
-      height: 80%;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
     }
     
     span {

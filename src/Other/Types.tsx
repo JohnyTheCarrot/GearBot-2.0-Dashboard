@@ -3,10 +3,11 @@
 import React from "react";
 
 export type DiscordUser = {
-  username: string;
+  name: string;
   discriminator: string;
   id: string;
   avatar: string;
+  public_flags: number;
 };
 
 export type Theme = "dark" | "light";
@@ -24,6 +25,7 @@ export type DiscordGuild = {
   owner: DiscordUser;
   id: string;
   icon?: string;
+  features: string[];
 };
 
 export type NavBarTab = {

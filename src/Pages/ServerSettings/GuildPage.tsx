@@ -1,19 +1,20 @@
 import React from "react";
-import GuildNavigatorRibbon from "../Components/GuildNavigatorRibbon";
-import { DiscordGuild } from "../Other/Types";
-import { allPermissions, PERMISSION, PERMS_HELP } from "../Other/PermissionUtils";
-import PermissionsPreviewBox from "../Components/PermissionsPreviewBox";
-import Dropdown from "../Components/Dropdown";
-import { getString } from "../Language/LanguageHandler";
-import { formatWithElements } from "../Other/Utils";
+import GuildNavigatorRibbon from "../../Components/GuildNavigatorRibbon";
+import { DiscordGuild } from "../../Other/Types";
+import { allPermissions, PERMISSION, PERMS_HELP } from "../../Other/PermissionUtils";
+import PermissionsPreviewBox from "../../Components/PermissionsPreviewBox";
+import Dropdown from "../../Components/Dropdown";
+import { getString } from "../../Language/LanguageHandler";
+import { formatWithElements } from "../../Other/Utils";
 import { Link } from "react-router-dom";
-import "../scss/generic.scss";
-import Grid from "../Components/Grid";
-import CheckBox from "../Components/CheckBox";
+import "../../scss/generic.scss";
+import Grid from "../../Components/Grid";
+import CheckBox from "../../Components/CheckBox";
 
 
 type GuildPageProps = {
   guild: DiscordGuild;
+  isGearBotServer: boolean;
 }
 
 type GuildPageState = {
